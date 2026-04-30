@@ -24,14 +24,12 @@
     letter-spacing: 0.0em;
   }
 
-  /* ── LAYOUT: two fixed columns ─────────────────── */
   .layout {
     display: flex;
     height: 100vh;
     width: 100vw;
   }
 
-  /* ── LEFT ──────────────────────────────────────── */
   .left {
     width: 50%;
     height: 100vh;
@@ -49,7 +47,6 @@
 
   .site-label {
     font-size: 9px;
-    letter-spacing: 0em;
     text-transform: uppercase;
     color: var(--black);
     margin-bottom: 2px;
@@ -57,17 +54,9 @@
 
   .site-name {
     font-size: 11px;
-    letter-spacing: 0em;
     text-transform: uppercase;
     font-weight: 400;
     line-height: 1.5;
-  }
-
-  .site-year {
-    font-size: 9px;
-    letter-spacing: 0em;
-    color: var(--grey);
-    margin-top: 1px;
   }
 
   .nav-section {
@@ -106,7 +95,6 @@
 
   .nav-cat {
     font-size: 9px;
-    letter-spacing: 0em;
     text-transform: uppercase;
     color: var(--black);
     margin-bottom: 3px;
@@ -115,7 +103,6 @@
 
   .nav-name {
     font-size: 11px;
-    letter-spacing: 0em;
     text-transform: uppercase;
     font-weight: 400;
     line-height: 1.5;
@@ -123,7 +110,6 @@
 
   .nav-year {
     font-size: 9px;
-    letter-spacing: 0em;
     color: var(--grey);
     margin-top: 3px;
     transition: color 0.15s;
@@ -137,7 +123,6 @@
 
   .footer-label {
     font-size: 9px;
-    letter-spacing: 0.0em;
     text-transform: uppercase;
     color: var(--black);
     margin-bottom: 5px;
@@ -146,7 +131,6 @@
   .site-footer a {
     display: block;
     font-size: 9px;
-    letter-spacing: 0.0em;
     text-transform: uppercase;
     color: var(--black);
     text-decoration: none;
@@ -154,9 +138,6 @@
     transition: color 0.15s;
   }
 
-  .site-footer a:hover { color: var(--black); }
-
-  /* ── RIGHT ─────────────────────────────────────── */
   .right {
     width: 50%;
     height: 100vh;
@@ -165,16 +146,20 @@
     overflow: hidden;
   }
 
-  /* top bar inside right — shows current section label */
   .right-topbar {
     padding: 26px 32px 22px;
     border-bottom: 1px solid var(--line);
     flex-shrink: 0;
   }
 
+  .right-topbar-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
   .right-topbar-label {
     font-size: 9px;
-    letter-spacing: 0em;
     text-transform: uppercase;
     color: var(--black);
     margin-bottom: 2px;
@@ -182,13 +167,11 @@
 
   .right-topbar-title {
     font-size: 11px;
-    letter-spacing: 0em;
     text-transform: uppercase;
     font-weight: 400;
     line-height: 1.5;
   }
 
-  /* scrollable content area */
   .right-scroll {
     flex: 1;
     overflow-y: auto;
@@ -197,11 +180,10 @@
     scrollbar-color: var(--line) transparent;
   }
 
-  /* ── PANELS (views inside right) ───────────────── */
   .panel { display: none; }
   .panel.active { display: block; }
 
-  /* ── ABOUT PANEL ───────────────────────────────── */
+  /* ── ABOUT ── */
   .about-block {
     padding: 20px 32px;
     border-bottom: 1px solid var(--line);
@@ -209,7 +191,6 @@
 
   .about-block-label {
     font-size: 9px;
-    letter-spacing: 0em;
     text-transform: uppercase;
     color: var(--black);
     margin-bottom: 8px;
@@ -217,7 +198,6 @@
 
   .about-block-text {
     font-size: 10px;
-    letter-spacing: 0.0em;
     line-height: 1.5;
     color: var(--black);
   }
@@ -230,30 +210,12 @@
     text-underline-offset: 3px;
   }
 
-  /* ── PROJECT PANEL ─────────────────────────────── */
+  /* ── PROJECT PANEL ── */
   .proj-meta {
     padding: 22px 32px 18px;
     border-bottom: 1px solid var(--line);
   }
 
-  /* .proj-cat {
-    font-size: 9px;
-    letter-spacing: 0em;
-    text-transform: uppercase;
-    color: var(--black);
-    margin-bottom: 5px;
-  }
-
-  .proj-title {
-    font-size: 12px;
-    letter-spacing: 0em;
-    text-transform: uppercase;
-    font-weight: 400;
-    line-height: 1.5;
-    margin-bottom: 16px;
-  }
-*/
- 
   .proj-details {
     display: flex;
     gap: 50px;
@@ -261,7 +223,6 @@
 
   .proj-detail-label {
     font-size: 8px;
-    letter-spacing: 0em;
     text-transform: uppercase;
     color: var(--black);
     margin-bottom: 4px;
@@ -269,7 +230,6 @@
 
   .proj-detail-val {
     font-size: 9px;
-    letter-spacing: 0em;
     line-height: 1.5;
   }
 
@@ -277,7 +237,6 @@
     padding: 18px 32px;
     border-bottom: 1px solid var(--line);
     font-size: 10px;
-    letter-spacing: 0em;
     line-height: 1.5;
     color: #444;
   }
@@ -287,7 +246,6 @@
     padding: 13px 32px;
     border-bottom: 1px solid var(--line);
     font-size: 9px;
-    letter-spacing: 0em;
     text-transform: uppercase;
     color: var(--grey);
     text-decoration: none;
@@ -296,12 +254,11 @@
 
   .proj-link:hover { color: var(--black); background: #eeeeed; }
 
-  /* ── GALLERY ───────────────────────────────────── */
+  /* ── GALLERY ── */
   .proj-gallery {
     display: flex;
     flex-direction: column;
     padding: 16px 28px 60px;
-    gap: 0;
   }
 
   .proj-gallery img {
@@ -320,20 +277,13 @@
 
   .gallery-caption {
     font-size: 8px;
-    letter-spacing: 0em;
     text-transform: uppercase;
     color: var(--grey);
     margin-bottom: 16px;
     margin-top: -4px;
   }
 
-  /* ── PREV/NEXT inside right topbar ─────────────── */
-  .right-topbar-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
-
+  /* ── PREV/NEXT ── */
   .proj-nav {
     display: none;
     gap: 20px;
@@ -348,7 +298,6 @@
     cursor: pointer;
     font-family: inherit;
     font-size: 9px;
-    letter-spacing: 0em;
     text-transform: uppercase;
     color: var(--grey);
     padding: 0;
@@ -363,20 +312,17 @@
 
 <div class="layout">
 
-  <!-- ══ LEFT: header + project list ══════════════ -->
+  <!-- ══ LEFT ══ -->
   <div class="left">
     <header class="site-header">
       <div class="site-label">Portfolio 2026</div>
       <div class="site-name">Beatrice Tronconi</div>
-      
     </header>
 
     <nav class="nav-section" id="navSection">
-      <!-- "About me" is the first item, active by default -->
       <button class="nav-item active" id="aboutNavBtn" onclick="showAbout()">
         <div class="nav-name">About me</div>
       </button>
-      <!-- projects injected by JS -->
     </nav>
 
     <footer class="site-footer">
@@ -385,7 +331,7 @@
     </footer>
   </div>
 
-  <!-- ══ RIGHT: always visible panel ══════════════ -->
+  <!-- ══ RIGHT ══ -->
   <div class="right">
     <div class="right-topbar">
       <div class="right-topbar-inner">
@@ -402,12 +348,12 @@
 
     <div class="right-scroll" id="rightScroll">
 
-      <!-- ── ABOUT PANEL (default) ── -->
+      <!-- ABOUT PANEL -->
       <div class="panel active" id="panelAbout">
 
         <div class="about-block">
           <div class="about-block-label">Profile</div>
-          <div class="about-block-text">Beatrice has strong organisational and analytical skills, with a proven ability to manage multiple projects, meet deadlines and adapt to fast-paced environments. Her background in communication design has developed her ability to structure information clearly and translate insights into effective visual and strategic outputs across digital and print channels. With experience in branding and social media management, she contributes to the planning and execution of communication activities, aligning content with objectives and audience needs. She's detail-oriented, collaborative and proactive, with a growing interest in data-driven marketing and media strategy. Additionally, her visual and content creation skills support clear and impactful communication across different platforms.</div>
+          <div class="about-block-text">Beatrice has strong organisational and analytical skills, with a proven ability to manage multiple projects, meet deadlines and adapt to fast-paced environments. Her background in communication design has developed her ability to structure information clearly and translate insights into effective visual and strategic outputs across digital and print channels. With experience in branding and social media management, she contributes to the planning and execution of communication activities, aligning content with objectives and audience needs. She's detail-oriented, collaborative and proactive, with a growing interest in data-driven marketing and media strategy.</div>
         </div>
 
         <div class="about-block">
@@ -415,37 +361,21 @@
           <div class="about-block-text">Available in Turin, Italy<br>Currently in Gallarate (VA), Italy</div>
         </div>
 
-       <div class="about-block">
+        <div class="about-block">
           <div class="about-block-label">Experience</div>
           <div class="about-block-text">
             <strong>Junior brand designer</strong><br>
-            Career Service, Politecnico di Milano - 11/2025-present<br><br>
-           Independently design and develop visual content and layouts for digital and print materials
-           targeting student and corporate audiences, ensuring brand consistency and alignment with
-           corporate identity guidelines. Collaborate with cross-functional teams and stakeholders to
-           translate communication briefs into effective visual solutions, taking ownership of multiple
-           projects and deadlines from concept development to final delivery.
-           <br><br>
+            Career Service, Politecnico di Milano — 11/2025–present<br><br>
+            Independently design and develop visual content and layouts for digital and print materials targeting student and corporate audiences, ensuring brand consistency and alignment with corporate identity guidelines. Collaborate with cross-functional teams and stakeholders to translate communication briefs into effective visual solutions.<br><br>
             <strong>Digital graphic designer</strong><br>
-            Les Ramè agency - 01/2025-04/2025<br><br>
-           Manage Instagram accounts for School of Design and Interdependence 2025 project,
-           planning and executing editorial content to increase engagement and audience reach.
-           Develop and publish visual and written content to ensure consistency across communication
-           channels while meeting deadlines and project objectives.
-           <br><br>
+            Les Ramè agency — 01/2025–04/2025<br><br>
+            Manage Instagram accounts for School of Design and Interdependence 2025 project, planning and executing editorial content to increase engagement and audience reach.<br><br>
             <strong>Social media manager</strong><br>
-            Politecnico di Milano - 07/2024–05/2025<br><br>
-           Produce visual assets and layout solutions for Instagram and LinkedIn for multiple clients and
-           the agency’s own channels, ensuring consistent and engaging digital communication.
-           Interpret briefs into effective digital outputs, adapting content to different platforms, clients
-           and audiences. Ensure visual coherence, attention to detail and deadlines across all materials.
-           <br><br>
+            Politecnico di Milano — 07/2024–05/2025<br><br>
+            Produce visual assets and layout solutions for Instagram and LinkedIn for multiple clients and the agency's own channels, ensuring consistent and engaging digital communication.<br><br>
             <strong>Museum guide</strong><br>
-            MAGA Museum - 2017, 2018<br><br>
-           Guided visitors and explained the historical background
-           of works on display.
-           <br><br>
-           
+            MAGA Museum — 2017, 2018<br><br>
+            Guided visitors and explained the historical background of works on display.
           </div>
         </div>
 
@@ -453,34 +383,32 @@
           <div class="about-block-label">Education</div>
           <div class="about-block-text">
             <strong>Communication Design, Master Degree</strong><br>
-            Politecnico di Milano - 2023-2026 - Grade: 109/110<br><br>
+            Politecnico di Milano — 2023–2026 — Grade: 109/110<br><br>
             <strong>Communication Design, Bachelor Degree</strong><br>
-            Politecnico di Milano - 2020-2023 - Grade: 105/110<br><br>
+            Politecnico di Milano — 2020–2023 — Grade: 105/110<br><br>
             <strong>Erasmus Experience, Graphic Design</strong><br>
-            Dundee University - Jan-May 2023<br><br>
+            Dundee University — Jan–May 2023<br><br>
             <strong>Scientific High School</strong><br>
-            L. Da Vinci, Gallarate - 2014-2019
+            L. Da Vinci, Gallarate — 2014–2019
           </div>
         </div>
-
-       
 
         <div class="about-block">
           <div class="about-block-label">Skills</div>
           <div class="about-block-text">
             Adobe Illustrator, InDesign, Photoshop, After Effects, Premiere Pro, Lightroom<br>
             Figma, Canva, Keynote, Capcut<br>
-           Microsoft Office<br>
+            Microsoft Office<br>
             HTML, CSS, Javascript
-            
           </div>
         </div>
 
         <div class="about-block">
           <div class="about-block-label">English</div>
-          <div class="about-block-text">TOEFL: 88/120, level C1-B2 (09/2022)<br>
-           First Certificate English, level B2 (06/2018) <br>
-          Summer School in UK, 2018, 2015, 2014, 2013
+          <div class="about-block-text">
+            TOEFL: 88/120, level C1–B2 (09/2022)<br>
+            First Certificate English, level B2 (06/2018)<br>
+            Summer School in UK, 2018, 2015, 2014, 2013
           </div>
         </div>
 
@@ -498,17 +426,11 @@
 
       </div><!-- /panelAbout -->
 
-      <!-- ── PROJECT PANEL (filled by JS) ── -->
+      <!-- PROJECT PANEL -->
       <div class="panel" id="panelProject">
-         <!-- ── <div class="proj-meta">
-        
-         <div class="proj-cat"  id="pCat"></div>
-          <div class="proj-title" id="pTitle"></div> 
-       
+        <div class="proj-meta">
           <div class="proj-details">
-      
-       
-           <div>
+            <div>
               <div class="proj-detail-label">Year</div>
               <div class="proj-detail-val" id="pYear"></div>
             </div>
@@ -518,22 +440,6 @@
             </div>
           </div>
         </div>
-          ── -->
-<div class="proj-meta">
-  <div class="proj-details">
-    <div>
-      <div class="proj-detail-label">Year</div>
-      <div class="proj-detail-val" id="pYear"></div>
-    </div>
-    <div>
-      <div class="proj-detail-label">Team</div>
-      <div class="proj-detail-val" id="pTeam"></div>
-    </div>
-  </div>
-</div>
-
-
-       
         <div class="proj-desc" id="pDesc"></div>
         <a id="pLink" class="proj-link" target="_blank">View project ↗</a>
         <div class="proj-gallery" id="pGallery"></div>
@@ -553,7 +459,7 @@ const projects = [
     year: '2025',
     team: ["A. D'Aiuto","A. Dezio","E. Galliani","G. Polimeno","C. Turi","I. Urgesi"],
     link: 'https://liked-trapped-shared.densitydesign.org/en/projects/ailanthus',
-    desc: 'The Ailanthus altissima, known as the Tree of Heaven, is a species native to China and introduced in Europe in the 18th century. While appreciated for its extraordinary resilience, it is also feared for its highly invasive nature, as it spreads quickly, disrupts local ecosystems, and damages urban infrastructure. This ambiguous reputation highlights the tension between human attempts at control and the persistent challenge of coexisting with what defies management. "Tree of Heaven or Hell?" explores this debate by analyzing 76 YouTube videos and 925 comments, revealing how public discussions around Ailanthus reflect broader power dynamics between humans and nature. The project guides the user through three artifacts that illustrate the complex digital perception of the Ailanthus: a supercut of videos introducing the plant, a scrolling LED display that visualizes the tone and polarization of comments, and a catalog of methods suggested by users to eradicate the species.',
+    desc: 'The Ailanthus altissima, known as the Tree of Heaven, is a species native to China and introduced in Europe in the 18th century. While appreciated for its extraordinary resilience, it is also feared for its highly invasive nature, as it spreads quickly, disrupts local ecosystems, and damages urban infrastructure. "Tree of Heaven or Hell?" explores this debate by analyzing 76 YouTube videos and 925 comments, revealing how public discussions around Ailanthus reflect broader power dynamics between humans and nature. The project guides the user through three artifacts: a supercut of videos introducing the plant, a scrolling LED display that visualizes the tone and polarization of comments, and a catalog of methods suggested by users to eradicate the species.',
     images: [
       {src:'https://beatricetronconi.github.io/ai1.jpg'},
       {src:'https://beatricetronconi.github.io/ai2.gif'},
@@ -672,7 +578,7 @@ const projects = [
   }
 ];
 
-// ── Build project nav items ────────────────────────────
+// Build nav
 const nav = document.getElementById('navSection');
 projects.forEach(p => {
   const btn = document.createElement('button');
@@ -687,56 +593,42 @@ projects.forEach(p => {
   nav.appendChild(btn);
 });
 
-// ── State ──────────────────────────────────────────────
 let currentId = null;
 
-// ── Show About ─────────────────────────────────────────
 function showAbout() {
   currentId = null;
-
-  // nav highlight
   document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
   document.getElementById('aboutNavBtn').classList.add('active');
-
-  // right topbar
   document.getElementById('rightLabel').textContent = 'About';
   document.getElementById('rightTitle').textContent = 'Beatrice Tronconi';
   document.getElementById('projNav').classList.remove('visible');
-
-  // panels
   document.getElementById('panelAbout').classList.add('active');
   document.getElementById('panelProject').classList.remove('active');
   document.getElementById('rightScroll').scrollTop = 0;
 }
 
-// ── Open project ───────────────────────────────────────
 function openProject(id) {
   const p = projects[id];
   currentId = id;
 
-  // nav highlight
   document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
   document.querySelector(`.nav-item[data-id="${id}"]`).classList.add('active');
 
-  // right topbar
   document.getElementById('rightLabel').textContent = p.cat;
   document.getElementById('rightTitle').textContent = p.name;
   document.getElementById('projNav').classList.add('visible');
   document.getElementById('prevBtn').disabled = (id === 0);
   document.getElementById('nextBtn').disabled = (id === projects.length - 1);
 
-  // fill content
-  document.getElementById('pCat').textContent   = p.cat;
-  document.getElementById('pTitle').textContent = p.name;
-  document.getElementById('pYear').textContent  = p.year;
-  document.getElementById('pTeam').innerHTML    = p.team.join('<br>');
-  document.getElementById('pDesc').textContent  = p.desc;
+  // ← only pYear, pTeam, pDesc — no pCat or pTitle
+  document.getElementById('pYear').textContent = p.year;
+  document.getElementById('pTeam').innerHTML   = p.team.join('<br>');
+  document.getElementById('pDesc').textContent = p.desc;
 
   const link = document.getElementById('pLink');
   if (p.link) { link.href = p.link; link.style.display = 'block'; }
   else { link.style.display = 'none'; }
 
-  // gallery
   const gallery = document.getElementById('pGallery');
   gallery.innerHTML = '';
   p.images.forEach((img, i) => {
@@ -757,7 +649,6 @@ function openProject(id) {
     }
   });
 
-  // panels
   document.getElementById('panelAbout').classList.remove('active');
   document.getElementById('panelProject').classList.add('active');
   document.getElementById('rightScroll').scrollTop = 0;
@@ -769,7 +660,6 @@ function navigateProject(dir) {
   if (next >= 0 && next < projects.length) openProject(next);
 }
 
-// keyboard
 document.addEventListener('keydown', e => {
   if (e.key === 'ArrowDown' && currentId !== null) { e.preventDefault(); navigateProject(1); }
   if (e.key === 'ArrowUp'   && currentId !== null) { e.preventDefault(); navigateProject(-1); }
