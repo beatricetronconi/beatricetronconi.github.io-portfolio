@@ -20,7 +20,7 @@
     background: var(--white);
     color: var(--black);
     font-family: 'Suisse Int\'l', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 11px;
+    font-size: 13px;
     letter-spacing: 0.0em;
   }
 
@@ -30,6 +30,7 @@
     width: 100vw;
   }
 
+  /* ── LEFT ── */
   .left {
     width: 50%;
     height: 100vh;
@@ -46,14 +47,14 @@
   }
 
   .site-label {
-    font-size: 9px;
+    font-size: 11px;
     text-transform: uppercase;
     color: var(--black);
     margin-bottom: 2px;
   }
 
   .site-name {
-    font-size: 11px;
+    font-size: 13px;
     text-transform: uppercase;
     font-weight: 400;
     line-height: 1.5;
@@ -94,7 +95,7 @@
   }
 
   .nav-cat {
-    font-size: 9px;
+    font-size: 11px;
     text-transform: uppercase;
     color: var(--black);
     margin-bottom: 3px;
@@ -102,14 +103,14 @@
   }
 
   .nav-name {
-    font-size: 11px;
+    font-size: 13px;
     text-transform: uppercase;
     font-weight: 400;
     line-height: 1.5;
   }
 
   .nav-year {
-    font-size: 9px;
+    font-size: 11px;
     color: var(--grey);
     margin-top: 3px;
     transition: color 0.15s;
@@ -122,7 +123,7 @@
   }
 
   .footer-label {
-    font-size: 10px;
+    font-size: 11px;
     text-transform: uppercase;
     color: var(--black);
     margin-bottom: 5px;
@@ -130,14 +131,15 @@
 
   .site-footer a {
     display: block;
-    font-size: 10px;
+    font-size: 11px;
     text-transform: uppercase;
     color: var(--black);
     text-decoration: none;
-    line-height: 1.5;
+    line-height: 1.6;
     transition: color 0.15s;
   }
 
+  /* ── RIGHT ── */
   .right {
     width: 50%;
     height: 100vh;
@@ -152,21 +154,15 @@
     flex-shrink: 0;
   }
 
-  .right-topbar-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
-
   .right-topbar-label {
-    font-size: 9px;
+    font-size: 11px;
     text-transform: uppercase;
     color: var(--black);
     margin-bottom: 2px;
   }
 
   .right-topbar-title {
-    font-size: 11px;
+    font-size: 13px;
     text-transform: uppercase;
     font-weight: 400;
     line-height: 1.5;
@@ -190,28 +186,28 @@
   }
 
   .about-block-label {
-    font-size: 9px;
+    font-size: 11px;
     text-transform: uppercase;
     color: var(--black);
     margin-bottom: 8px;
   }
 
   .about-block-text {
-    font-size: 10px;
-    line-height: 1.5;
+    font-size: 12px;
+    line-height: 1.6;
     color: var(--black);
   }
 
-  .about-block-text strong { font-size: 12px; font-weight: 500; }
+  .about-block-text strong { font-weight: 600; }
 
+  /* links: underline only, no arrow */
   .about-block-text a {
     color: var(--black);
     text-decoration: underline;
     text-underline-offset: 3px;
   }
 
-  /* ── PROJECT PANEL ── */
-  /* each detail row spans full width, padding matches about-block */
+  /* ── PROJECT DETAIL ROWS ── */
   .proj-detail-row {
     padding: 14px 32px;
     border-bottom: 1px solid var(--line);
@@ -221,21 +217,21 @@
   }
 
   .proj-detail-label {
-    font-size: 8px;
+    font-size: 10px;
     text-transform: uppercase;
     color: var(--black);
   }
 
   .proj-detail-val {
-    font-size: 9px;
+    font-size: 11px;
     line-height: 1.5;
   }
 
   .proj-desc {
     padding: 18px 32px;
     border-bottom: 1px solid var(--line);
-    font-size: 10px;
-    line-height: 1.5;
+    font-size: 12px;
+    line-height: 1.6;
     color: #444;
   }
 
@@ -243,14 +239,15 @@
     display: none;
     padding: 13px 32px;
     border-bottom: 1px solid var(--line);
-    font-size: 9px;
+    font-size: 11px;
     text-transform: uppercase;
-    color: var(--grey);
-    text-decoration: none;
+    color: var(--black);
+    text-decoration: underline;
+    text-underline-offset: 3px;
     transition: color 0.15s, background 0.15s;
   }
 
-  .proj-link:hover { color: var(--black); background: #eeeeed; }
+  .proj-link:hover { background: #eeeeed; }
 
   /* ── GALLERY ── */
   .proj-gallery {
@@ -259,14 +256,13 @@
     padding: 0 0 60px;
   }
 
-  /* each image block: caption on top, then image, then border */
   .gallery-item {
     padding: 14px 32px;
     border-bottom: 1px solid var(--line);
   }
 
   .gallery-caption {
-    font-size: 8px;
+    font-size: 10px;
     text-transform: uppercase;
     color: var(--grey);
     margin-bottom: 10px;
@@ -285,29 +281,54 @@
     transform: none;
   }
 
-  /* ── PREV/NEXT ── */
-  .proj-nav {
-    display: none;
-    gap: 20px;
-    align-items: center;
-  }
-
-  .proj-nav.visible { display: flex; }
-
-  .proj-nav-btn {
-    background: none;
-    border: none;
+  /* ── LAZY VIDEO ── */
+  .gallery-item .video-wrapper {
+    position: relative;
+    width: 100%;
+    background: #000;
     cursor: pointer;
-    font-family: inherit;
-    font-size: 9px;
-    text-transform: uppercase;
-    color: var(--grey);
-    padding: 0;
-    transition: color 0.15s;
   }
 
-  .proj-nav-btn:hover { color: var(--black); }
-  .proj-nav-btn:disabled { opacity: 0.25; pointer-events: none; }
+  .gallery-item .video-wrapper iframe {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border: none;
+    display: block;
+  }
+
+  .gallery-item .video-thumb {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 1;
+    transition: opacity 0.3s;
+  }
+
+  .gallery-item .play-btn {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 52px; height: 52px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    pointer-events: none;
+  }
+
+  .gallery-item .play-btn::after {
+    content: '';
+    border-style: solid;
+    border-width: 9px 0 9px 18px;
+    border-color: transparent transparent transparent #0f0f0f;
+    margin-left: 3px;
+  }
+
+  /* sentinel at end of gallery for auto-advance */
+  .gallery-sentinel {
+    height: 1px;
+  }
 </style>
 </head>
 <body>
@@ -337,16 +358,8 @@
   <!-- ══ RIGHT ══ -->
   <div class="right">
     <div class="right-topbar">
-      <div class="right-topbar-inner">
-        <div>
-          <div class="right-topbar-label" id="rightLabel">About</div>
-          <div class="right-topbar-title" id="rightTitle">Beatrice Tronconi</div>
-        </div>
-        <div class="proj-nav" id="projNav">
-          <button class="proj-nav-btn" id="prevBtn" onclick="navigateProject(-1)">← Prev</button>
-          <button class="proj-nav-btn" id="nextBtn" onclick="navigateProject(1)">Next →</button>
-        </div>
-      </div>
+      <div class="right-topbar-label" id="rightLabel">About</div>
+      <div class="right-topbar-title" id="rightTitle">Beatrice Tronconi</div>
     </div>
 
     <div class="right-scroll" id="rightScroll">
@@ -382,18 +395,18 @@
           </div>
         </div>
 
-       <div class="about-block">
+        <div class="about-block">
           <div class="about-block-label">Exhibitions</div>
           <div class="about-block-text">
             <strong>Liked Trapped Shared</strong><br>
             Project: Tree of Heaven or Hell?<br>
-            <a href="https://liked-trapped-shared.densitydesign.org/en/projects/ailanthus" target="_blank">MEET Digital Culture Center — 03/2025 ↗</a><br><br>
+            <a href="https://liked-trapped-shared.densitydesign.org/en/projects/ailanthus" target="_blank">MEET Digital Culture Center — 03/2025</a><br><br>
             <strong>ControSenso</strong><br>
             Project: Svelare Dettagli<br>
-            <a href="https://www.sinestesie.it/controsenso/2024/svelare-dettagli" target="_blank">Rai pubblica utilità — 11/2024 ↗</a><br><br>
+            <a href="https://www.sinestesie.it/controsenso/2024/svelare-dettagli" target="_blank">Rai pubblica utilità — 11/2024</a><br><br>
             <strong>Anthropogenic Narratives</strong><br>
             Project: EXHOIL<br>
-            <a href="http://anthropogenicnarratives.labsintesi-c1.info/projects/04_EXHOIL.html" target="_blank">Triennale Milano — 03/2023 ↗</a>
+            <a href="http://anthropogenicnarratives.labsintesi-c1.info/projects/04_EXHOIL.html" target="_blank">Triennale Milano — 03/2023</a>
           </div>
         </div>
 
@@ -438,7 +451,7 @@
         <div class="about-block">
           <div class="about-block-label">Download CV</div>
           <div class="about-block-text">
-            <a href="https://beatricetronconi.github.io/Tronconi_CV.pdf" target="_blank">Download PDF ↗</a>
+            <a href="https://beatricetronconi.github.io/Tronconi_CV.pdf" target="_blank">Download PDF</a>
           </div>
         </div>
 
@@ -459,7 +472,7 @@
           <div class="proj-detail-val" id="pRole"></div>
         </div>
         <div class="proj-desc" id="pDesc"></div>
-        <a id="pLink" class="proj-link" target="_blank">View project ↗</a>
+        <a id="pLink" class="proj-link" target="_blank">View project</a>
         <div class="proj-gallery" id="pGallery"></div>
       </div>
 
@@ -469,6 +482,8 @@
 </div><!-- /layout -->
 
 <script>
+const BASE = 'https://raw.githubusercontent.com/beatricetronconi/beatricetronconi.github.io-portfolio/main/';
+
 const projects = [
   {
     id: 0,
@@ -476,19 +491,19 @@ const projects = [
     name: 'Junior Brand Designer',
     year: '2025–2026',
     role: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    team: [Politecnico di Milano],
+    team: ["Politecnico di Milano"],
     link: null,
     desc: 'Independently design and develop visual content and layouts for digital and print materials targeting student and corporate audiences, ensuring brand consistency and alignment with corporate identity guidelines. Collaborate with cross-functional teams and stakeholders to translate communication briefs into effective visual solutions.',
-    images: [{src:'https://github.com/beatricetronconi/beatricetronconi.github.io-portfolio/blob/main/lr6.jpg',caption:'Lorem ipsum dolor sit amet'},
-  {src:'https://github.com/beatricetronconi/beatricetronconi.github.io-portfolio/blob/main/po1.jpg', caption:'Lorem ipsum dolor sit amet'},
-  {src:'https://github.com/beatricetronconi/beatricetronconi.github.io-portfolio/blob/main/po2.jpg', caption:'Lorem ipsum dolor sit amet'},
-  {src:'https://github.com/beatricetronconi/beatricetronconi.github.io-portfolio/blob/main/po3.jpg', caption:'Lorem ipsum dolor sit amet'},
-  {src:'https://github.com/beatricetronconi/beatricetronconi.github.io-portfolio/blob/main/po4.jpg', caption:'Lorem ipsum dolor sit amet'},
-            ]
+    images: [
+      {src: BASE+'po1.jpg', caption:'Lorem ipsum dolor sit amet'},
+      {src: BASE+'po2.jpg', caption:'Lorem ipsum dolor sit amet'},
+      {src: BASE+'po3.jpg', caption:'Lorem ipsum dolor sit amet'},
+      {src: BASE+'po4.jpg', caption:'Lorem ipsum dolor sit amet'},
+    ]
   },
   {
     id: 1,
-    cat: 'Social media Designer, at Les Ramè Agency',
+    cat: 'Social media design, at Les Ramè Agency',
     name: 'Digital Graphic Designer',
     year: '2025',
     role: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
@@ -496,13 +511,13 @@ const projects = [
     link: null,
     desc: 'Manage Instagram accounts for School of Design and Interdependence 2025 project, planning and executing editorial content to increase engagement and audience reach. Develop and publish visual and written content to ensure consistency across communication channels while meeting deadlines and project objectives.',
     images: [
-     {src:'https://github.com/beatricetronconi/beatricetronconi.github.io-portfolio/lr6.jpg',caption:'Lorem ipsum dolor sit amet'},
-  {src:'https://github.com/beatricetronconi/beatricetronconi.github.io-portfolio/lr5.jpg', caption:'Lorem ipsum dolor sit amet'},
-  {src:'https://github.com/beatricetronconi/beatricetronconi.github.io-portfolio/lr4.jpg', caption:'Lorem ipsum dolor sit amet'},
-  {src:'https://github.com/beatricetronconi/beatricetronconi.github.io-portfolio/lr3.jpg', caption:'Lorem ipsum dolor sit amet'},
-  {src:'https://github.com/beatricetronconi/beatricetronconi.github.io-portfolio/lr2.jpg', caption:'Lorem ipsum dolor sit amet'},
-  {src:'https://github.com/beatricetronconi/beatricetronconi.github.io-portfolio/lr1.jpg',caption:'Lorem ipsum dolor sit amet'},
-   ]
+      {src: BASE+'lr1.jpg', caption:'Lorem ipsum dolor sit amet'},
+      {src: BASE+'lr2.jpg', caption:'Lorem ipsum dolor sit amet'},
+      {src: BASE+'lr3.jpg', caption:'Lorem ipsum dolor sit amet'},
+      {src: BASE+'lr4.jpg', caption:'Lorem ipsum dolor sit amet'},
+      {src: BASE+'lr5.jpg', caption:'Lorem ipsum dolor sit amet'},
+      {src: BASE+'lr6.jpg', caption:'Lorem ipsum dolor sit amet'},
+    ]
   },
   {
     id: 2,
@@ -512,7 +527,7 @@ const projects = [
     role: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
     team: ["A. D'Aiuto","A. Dezio","E. Galliani","G. Polimeno","C. Turi","I. Urgesi"],
     link: 'https://liked-trapped-shared.densitydesign.org/en/projects/ailanthus',
-    desc: 'The Ailanthus altissima, known as the Tree of Heaven, is a species native to China and introduced in Europe in the 18th century. While appreciated for its extraordinary resilience, it is also feared for its highly invasive nature, as it spreads quickly, disrupts local ecosystems, and damages urban infrastructure. "Tree of Heaven or Hell?" explores this debate by analyzing 76 YouTube videos and 925 comments, revealing how public discussions around Ailanthus reflect broader power dynamics between humans and nature. The project guides the user through three artifacts: a supercut of videos introducing the plant, a scrolling LED display that visualizes the tone and polarization of comments, and a catalog of methods suggested by users to eradicate the species.',
+    desc: 'The Ailanthus altissima, known as the Tree of Heaven, is a species native to China and introduced in Europe in the 18th century. While appreciated for its extraordinary resilience, it is also feared for its highly invasive nature. "Tree of Heaven or Hell?" explores this debate by analyzing 76 YouTube videos and 925 comments, revealing how public discussions around Ailanthus reflect broader power dynamics between humans and nature. The project guides the user through three artifacts: a supercut of videos, a scrolling LED display that visualizes comment polarization, and a catalog of eradication methods.',
     images: [
       {src:'https://beatricetronconi.github.io/ai1.jpg', caption:'Lorem ipsum dolor sit amet'},
       {src:'https://beatricetronconi.github.io/ai2.gif', caption:'Lorem ipsum dolor sit amet'},
@@ -522,6 +537,7 @@ const projects = [
       {src:'https://beatricetronconi.github.io/ai7.jpg', caption:'Lorem ipsum dolor sit amet'},
       {src:'https://beatricetronconi.github.io/ai8.png', caption:'Lorem ipsum dolor sit amet'},
       {src:'https://beatricetronconi.github.io/ai6.png', caption:'Lorem ipsum dolor sit amet'},
+      // to add a video: {video: 'YOUTUBE_ID', caption:'Video title'}
     ]
   },
   {
@@ -553,7 +569,7 @@ const projects = [
     role: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
     team: ["L. Gottifredi","E. Lumini","M. Semeraro","D. Sottile"],
     link: 'https://www.sinestesie.it/controsenso/2024/svelare-dettagli',
-    desc: 'A project focused on accessibility in contemporary art, developed through analysis of three artworks from the Villa Panza collection in Varese. Through an accessible video and a series of tactile artefacts, the project makes art accessible to people who are blind or visually impaired — inviting the audience to discover what lies beneath the surface with both eyes and hands.',
+    desc: 'A project focused on accessibility in contemporary art, developed through analysis of three artworks from the Villa Panza collection in Varese. Through an accessible video and a series of tactile artefacts, the project makes art accessible to people who are blind or visually impaired.',
     images: [
       {src:'https://beatricetronconi.github.io/sd01.jpg', caption:'Lorem ipsum dolor sit amet'},
       {src:'https://beatricetronconi.github.io/sd04.jpg', caption:'Lorem ipsum dolor sit amet'},
@@ -571,7 +587,7 @@ const projects = [
     role: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
     team: ["C. Compagnoni","C. Di Bella","F. Scarfone","M. Semeraro","C. Turi"],
     link: 'http://anthropogenicnarratives.labsintesi-c1.info/projects/04_EXHOIL.html',
-    desc: 'A speculative branding project set in 2050, when humans must breathe for the soil to re-establish the carbon cycle. Exhoil — originally an oil company — has pivoted to restoring carbon in the soil. Petrol stations now host breathing columns where humans become a resource for the natural world, paying the price for centuries of soil exploitation.',
+    desc: 'A speculative branding project set in 2050, when humans must breathe for the soil to re-establish the carbon cycle. Exhoil — originally an oil company — has pivoted to restoring carbon in the soil. Petrol stations now host breathing columns where humans become a resource for the natural world.',
     images: [
       {src:'https://beatricetronconi.github.io/ex1.jpg', caption:'Lorem ipsum dolor sit amet'},
       {src:'https://beatricetronconi.github.io/ex2.jpg', caption:'Lorem ipsum dolor sit amet'},
@@ -590,7 +606,7 @@ const projects = [
     role: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
     team: ["N. Barbanti","C. Compagnoni","C. Turi","I. Urgesi"],
     link: null,
-    desc: 'A visual identity system for the UNESCO World Heritage site of Trulli di Alberobello, designed to avoid tourist clichés. The project spans institutional materials, playing cards, booklets, a wayfinding system, posters, branded gadgets, and a mobile application — all guiding visitors to experience Alberobello in an authentic and meaningful way.',
+    desc: 'A visual identity system for the UNESCO World Heritage site of Trulli di Alberobello, designed to avoid tourist clichés. The project spans institutional materials, playing cards, booklets, a wayfinding system, posters, branded gadgets, and a mobile application.',
     images: [
       {src:'https://beatricetronconi.github.io/tr0.jpg', caption:'Lorem ipsum dolor sit amet'},
       {src:'https://beatricetronconi.github.io/tr1.jpg', caption:'Lorem ipsum dolor sit amet'},
@@ -610,7 +626,7 @@ const projects = [
     role: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
     team: ["Beatrice Tronconi"],
     link: null,
-    desc: 'Since 2021, an ongoing exploration of analogue photography with an Olympus mju II and Olympus am100. The unpredictability of film — the anticipation, the delayed gratification, the unique imperfections — gives each image its own character. Locations range from Italian lakes and museums to Scotland, Santorini, Los Angeles, Tokyo, and Paris.',
+    desc: 'Since 2021, an ongoing exploration of analogue photography with an Olympus mju II and Olympus am100. The unpredictability of film gives each image its own character. Locations range from Italian lakes and museums to Scotland, Santorini, Los Angeles, Tokyo, and Paris.',
     images: [
       {src:'https://beatricetronconi.github.io/an-01.jpg', caption:'Lake'},
       {src:'https://beatricetronconi.github.io/an-02.jpg', caption:'MAXXI'},
@@ -636,7 +652,7 @@ const projects = [
   }
 ];
 
-// Build nav
+// ── Build nav ──────────────────────────────────────────
 const nav = document.getElementById('navSection');
 projects.forEach(p => {
   const btn = document.createElement('button');
@@ -652,31 +668,34 @@ projects.forEach(p => {
 });
 
 let currentId = null;
+let sentinelObserver = null;
 
+// ── Show About ─────────────────────────────────────────
 function showAbout() {
   currentId = null;
+  if (sentinelObserver) { sentinelObserver.disconnect(); sentinelObserver = null; }
   document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
   document.getElementById('aboutNavBtn').classList.add('active');
   document.getElementById('rightLabel').textContent = 'About';
   document.getElementById('rightTitle').textContent = 'Beatrice Tronconi';
-  document.getElementById('projNav').classList.remove('visible');
   document.getElementById('panelAbout').classList.add('active');
   document.getElementById('panelProject').classList.remove('active');
   document.getElementById('rightScroll').scrollTop = 0;
 }
 
+// ── Open project ───────────────────────────────────────
 function openProject(id) {
   const p = projects[id];
   currentId = id;
+
+  // disconnect previous sentinel
+  if (sentinelObserver) { sentinelObserver.disconnect(); sentinelObserver = null; }
 
   document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
   document.querySelector(`.nav-item[data-id="${id}"]`).classList.add('active');
 
   document.getElementById('rightLabel').textContent = p.cat;
   document.getElementById('rightTitle').textContent = p.name;
-  document.getElementById('projNav').classList.add('visible');
-  document.getElementById('prevBtn').disabled = (id === 0);
-  document.getElementById('nextBtn').disabled = (id === projects.length - 1);
 
   document.getElementById('pYear').textContent = p.year;
   document.getElementById('pTeam').innerHTML   = p.team.length ? p.team.join('<br>') : '—';
@@ -687,47 +706,103 @@ function openProject(id) {
   if (p.link) { link.href = p.link; link.style.display = 'block'; }
   else { link.style.display = 'none'; }
 
+  // ── Build gallery ──
   const gallery = document.getElementById('pGallery');
   gallery.innerHTML = '';
-  p.images.forEach((img, i) => {
-    // wrapper div: caption on top, image below
-    const item = document.createElement('div');
-    item.className = 'gallery-item';
+  const scroll = document.getElementById('rightScroll');
 
-    if (img.caption) {
+  p.images.forEach((item, i) => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'gallery-item';
+
+    if (item.caption) {
       const cap = document.createElement('div');
       cap.className = 'gallery-caption';
-      cap.textContent = img.caption;
-      item.appendChild(cap);
+      cap.textContent = item.caption;
+      wrapper.appendChild(cap);
     }
 
-    const el = document.createElement('img');
-    el.src = img.src;
-    el.alt = img.caption || p.name;
-    el.style.transitionDelay = (i * 0.055) + 's';
-    const ob = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); ob.unobserve(e.target); } });
-    }, { root: document.getElementById('rightScroll'), threshold: 0.05 });
-    ob.observe(el);
-    item.appendChild(el);
+    if (item.video) {
+      // ── Lazy YouTube video ──
+      const vw = document.createElement('div');
+      vw.className = 'video-wrapper';
 
-    gallery.appendChild(item);
+      // thumbnail (YouTube auto-thumb)
+      const thumb = document.createElement('img');
+      thumb.className = 'video-thumb';
+      thumb.src = `https://img.youtube.com/vi/${item.video}/hqdefault.jpg`;
+      thumb.alt = item.caption || 'Video';
+
+      const play = document.createElement('div');
+      play.className = 'play-btn';
+
+      vw.appendChild(thumb);
+      vw.appendChild(play);
+
+      // click → load iframe
+      vw.addEventListener('click', () => {
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube.com/embed/${item.video}?autoplay=1`;
+        iframe.allow = 'autoplay; fullscreen';
+        thumb.style.opacity = '0';
+        setTimeout(() => thumb.remove(), 300);
+        play.remove();
+        vw.appendChild(iframe);
+      });
+
+      wrapper.appendChild(vw);
+
+    } else {
+      // ── Image ──
+      const el = document.createElement('img');
+      el.src = item.src;
+      el.alt = item.caption || p.name;
+      el.style.transitionDelay = (i * 0.04) + 's';
+
+      const ob = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); ob.unobserve(e.target); } });
+      }, { root: scroll, threshold: 0.05 });
+      ob.observe(el);
+
+      wrapper.appendChild(el);
+    }
+
+    gallery.appendChild(wrapper);
   });
+
+  // ── Sentinel: auto-advance to next project when gallery end is reached ──
+  const sentinel = document.createElement('div');
+  sentinel.className = 'gallery-sentinel';
+  gallery.appendChild(sentinel);
+
+  const nextId = id + 1;
+  if (nextId < projects.length) {
+    sentinelObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          sentinelObserver.disconnect();
+          sentinelObserver = null;
+          // small delay so user sees the end before switching
+          setTimeout(() => openProject(nextId), 600);
+        }
+      });
+    }, { root: scroll, threshold: 1.0 });
+    sentinelObserver.observe(sentinel);
+  }
 
   document.getElementById('panelAbout').classList.remove('active');
   document.getElementById('panelProject').classList.add('active');
-  document.getElementById('rightScroll').scrollTop = 0;
+  scroll.scrollTop = 0;
 }
 
-function navigateProject(dir) {
-  if (currentId === null) return;
-  const next = currentId + dir;
-  if (next >= 0 && next < projects.length) openProject(next);
-}
-
+// ── Keyboard ───────────────────────────────────────────
 document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowDown' && currentId !== null) { e.preventDefault(); navigateProject(1); }
-  if (e.key === 'ArrowUp'   && currentId !== null) { e.preventDefault(); navigateProject(-1); }
+  if (e.key === 'ArrowDown' && currentId !== null && currentId < projects.length - 1) {
+    e.preventDefault(); openProject(currentId + 1);
+  }
+  if (e.key === 'ArrowUp' && currentId !== null && currentId > 0) {
+    e.preventDefault(); openProject(currentId - 1);
+  }
 });
 </script>
 </body>
