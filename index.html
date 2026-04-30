@@ -211,27 +211,13 @@
   }
 
   /* ── PROJECT PANEL ── */
-  .proj-meta {
-    padding: 22px 32px 18px;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .proj-details {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
+  /* each detail row spans full width, padding matches about-block */
   .proj-detail-row {
-    padding: 10px 0;
+    padding: 14px 32px;
     border-bottom: 1px solid var(--line);
     display: flex;
     flex-direction: column;
-    gap: 3px;
-  }
-
-  .proj-detail-row:last-child {
-    border-bottom: none;
+    gap: 4px;
   }
 
   .proj-detail-label {
@@ -270,29 +256,33 @@
   .proj-gallery {
     display: flex;
     flex-direction: column;
-    padding: 16px 28px 60px;
+    padding: 0 0 60px;
   }
 
-  .proj-gallery img {
-    width: 100%;
-    display: block;
-    margin-bottom: 10px;
-    opacity: 0;
-    transform: translateY(8px);
-    transition: opacity 0.45s ease, transform 0.45s ease;
-  }
-
-  .proj-gallery img.vis {
-    opacity: 1;
-    transform: none;
+  /* each image block: caption on top, then image, then border */
+  .gallery-item {
+    padding: 14px 32px;
+    border-bottom: 1px solid var(--line);
   }
 
   .gallery-caption {
     font-size: 8px;
     text-transform: uppercase;
     color: var(--grey);
-    margin-bottom: 16px;
-    margin-top: -4px;
+    margin-bottom: 10px;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    display: block;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+  }
+
+  .gallery-item img.vis {
+    opacity: 1;
+    transform: none;
   }
 
   /* ── PREV/NEXT ── */
@@ -340,6 +330,7 @@
     <footer class="site-footer">
       <div class="footer-label">Contacts</div>
       <a href="mailto:beatricetronconi4@gmail.com">beatricetronconi4@gmail.com</a>
+      <a href="tel:+393914903630">+39 391 490 3630</a>
     </footer>
   </div>
 
@@ -365,13 +356,7 @@
 
         <div class="about-block">
           <div class="about-block-label">Profile</div>
-          <div class="about-block-text">Beatrice has strong organisational and analytical skills, with a proven ability to manage multiple projects, meet deadlines and
-adapt to fast-paced environments. Her background in communication design has developed her ability to structure
-information clearly and translate insights into effective visual and strategic outputs across digital and print channels.
-With experience in branding and social media management, she contributes to the planning and execution of communication
-activities, aligning content with objectives and audience needs. She is detail-oriented, collaborative and proactive, with a
-growing interest in data-driven marketing and media strategy. Additionally, her visual and content creation skills support
-clear and impactful communication across different platforms.</div>
+          <div class="about-block-text">Beatrice has strong organisational and analytical skills, with a proven ability to manage multiple projects, meet deadlines and adapt to fast-paced environments. Her background in communication design has developed her ability to structure information clearly and translate insights into effective visual and strategic outputs across digital and print channels. With experience in branding and social media management, she contributes to the planning and execution of communication activities, aligning content with objectives and audience needs. She is detail-oriented, collaborative and proactive, with a growing interest in data-driven marketing and media strategy. Additionally, her visual and content creation skills support clear and impactful communication across different platforms.</div>
         </div>
 
         <div class="about-block">
@@ -461,22 +446,17 @@ clear and impactful communication across different platforms.</div>
 
       <!-- PROJECT PANEL -->
       <div class="panel" id="panelProject">
-        <div class="proj-meta">
-        <div class="proj-meta">
-          <div class="proj-details">
-            <div class="proj-detail-row">
-              <div class="proj-detail-label">Year</div>
-              <div class="proj-detail-val" id="pYear"></div>
-            </div>
-            <div class="proj-detail-row">
-              <div class="proj-detail-label">Team</div>
-              <div class="proj-detail-val" id="pTeam"></div>
-            </div>
-            <div class="proj-detail-row">
-              <div class="proj-detail-label">Role</div>
-              <div class="proj-detail-val" id="pRole" style="line-height:1.6;"></div>
-            </div>
-          </div>
+        <div class="proj-detail-row">
+          <div class="proj-detail-label">Year</div>
+          <div class="proj-detail-val" id="pYear"></div>
+        </div>
+        <div class="proj-detail-row">
+          <div class="proj-detail-label">Team</div>
+          <div class="proj-detail-val" id="pTeam"></div>
+        </div>
+        <div class="proj-detail-row">
+          <div class="proj-detail-label">Role</div>
+          <div class="proj-detail-val" id="pRole"></div>
         </div>
         <div class="proj-desc" id="pDesc"></div>
         <a id="pLink" class="proj-link" target="_blank">View project ↗</a>
@@ -686,7 +666,6 @@ function openProject(id) {
   document.getElementById('prevBtn').disabled = (id === 0);
   document.getElementById('nextBtn').disabled = (id === projects.length - 1);
 
-  // ← only pYear, pTeam, pDesc — no pCat or pTitle
   document.getElementById('pYear').textContent = p.year;
   document.getElementById('pTeam').innerHTML   = p.team.length ? p.team.join('<br>') : '—';
   document.getElementById('pRole').textContent = p.role;
@@ -699,6 +678,17 @@ function openProject(id) {
   const gallery = document.getElementById('pGallery');
   gallery.innerHTML = '';
   p.images.forEach((img, i) => {
+    // wrapper div: caption on top, image below
+    const item = document.createElement('div');
+    item.className = 'gallery-item';
+
+    if (img.caption) {
+      const cap = document.createElement('div');
+      cap.className = 'gallery-caption';
+      cap.textContent = img.caption;
+      item.appendChild(cap);
+    }
+
     const el = document.createElement('img');
     el.src = img.src;
     el.alt = img.caption || p.name;
@@ -707,13 +697,9 @@ function openProject(id) {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); ob.unobserve(e.target); } });
     }, { root: document.getElementById('rightScroll'), threshold: 0.05 });
     ob.observe(el);
-    gallery.appendChild(el);
-    if (img.caption) {
-      const cap = document.createElement('div');
-      cap.className = 'gallery-caption';
-      cap.textContent = img.caption;
-      gallery.appendChild(cap);
-    }
+    item.appendChild(el);
+
+    gallery.appendChild(item);
   });
 
   document.getElementById('panelAbout').classList.remove('active');
