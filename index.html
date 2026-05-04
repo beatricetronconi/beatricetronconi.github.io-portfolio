@@ -9,15 +9,15 @@
 
   :root {
     --black: #0f0f0f;
-    --white: #f5f5f3;
-    --grey:  #888;
+    --white: #ffffff;
+    --grey:  #0f0f0f;
     --line:  #0f0f0f;
   }
 
   html, body { height: 100%; overflow: hidden; }
 
   body {
-    background: var(--white);
+    background: #ffffff;
     color: var(--black);
     font-family: 'Suisse Int\'l', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 13px;
@@ -232,7 +232,7 @@
     border-bottom: 1px solid var(--line);
     font-size: 12px;
     line-height: 1.6;
-    color: #444;
+    color: var(--black);
   }
 
   .proj-link {
@@ -249,23 +249,36 @@
 
   .proj-link:hover { background: #eeeeed; }
 
+  /* ── PROJECT SECTIONS (continuous scroll) ── */
+  .proj-section {
+    border-bottom: 3px solid var(--line);
+  }
+
   /* ── GALLERY ── */
   .proj-gallery {
     display: flex;
     flex-direction: column;
-    padding: 0 0 60px;
+    padding: 0;
+    gap: 0;
   }
 
   .gallery-item {
-    padding: 14px 32px;
-    border-bottom: 1px solid var(--line);
+    position: relative;
+    line-height: 0; /* removes inline gap under img */
   }
 
   .gallery-caption {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
     font-size: 10px;
+    line-height: 1.4;
     text-transform: uppercase;
-    color: var(--grey);
-    margin-bottom: 10px;
+    color: #ffffff;
+    background: #0f0f0f;
+    padding: 3px 7px;
+    pointer-events: none;
   }
 
   .gallery-item img {
@@ -457,23 +470,9 @@
 
       </div><!-- /panelAbout -->
 
-      <!-- PROJECT PANEL -->
+      <!-- PROJECT PANEL: all sections rendered continuously by JS -->
       <div class="panel" id="panelProject">
-        <div class="proj-detail-row">
-          <div class="proj-detail-label">Year</div>
-          <div class="proj-detail-val" id="pYear"></div>
-        </div>
-        <div class="proj-detail-row">
-          <div class="proj-detail-label">Team</div>
-          <div class="proj-detail-val" id="pTeam"></div>
-        </div>
-        <div class="proj-detail-row">
-          <div class="proj-detail-label">Role</div>
-          <div class="proj-detail-val" id="pRole"></div>
-        </div>
-        <div class="proj-desc" id="pDesc"></div>
-        <a id="pLink" class="proj-link" target="_blank">View project</a>
-        <div class="proj-gallery" id="pGallery"></div>
+        <div id="pGallery"></div>
       </div>
 
     </div><!-- /right-scroll -->
@@ -663,147 +662,150 @@ projects.forEach(p => {
     <div class="nav-name">${p.name}</div>
     <div class="nav-year">${p.year}</div>
   `;
-  btn.addEventListener('click', () => openProject(p.id));
+  btn.addEventListener('click', () => scrollToProject(p.id));
   nav.appendChild(btn);
 });
 
-let currentId = null;
-let sentinelObserver = null;
+const scroll = document.getElementById('rightScroll');
+const gallery = document.getElementById('pGallery');
 
-// ── Show About ─────────────────────────────────────────
+// ── Build all project sections at once ────────────────
+function buildAllProjects() {
+  gallery.innerHTML = '';
+  projects.forEach(p => {
+    const section = document.createElement('div');
+    section.className = 'proj-section';
+    section.dataset.id = p.id;
+
+    // meta rows
+    section.innerHTML = `
+      <div class="proj-detail-row">
+        <div class="proj-detail-label">Year</div>
+        <div class="proj-detail-val">${p.year}</div>
+      </div>
+      <div class="proj-detail-row">
+        <div class="proj-detail-label">Team</div>
+        <div class="proj-detail-val">${p.team.length ? p.team.join('<br>') : '—'}</div>
+      </div>
+      <div class="proj-detail-row">
+        <div class="proj-detail-label">Role</div>
+        <div class="proj-detail-val">${p.role}</div>
+      </div>
+      <div class="proj-desc">${p.desc}</div>
+      ${p.link ? `<a class="proj-link" href="${p.link}" target="_blank" style="display:block;">View project</a>` : ''}
+    `;
+
+    // images
+    p.images.forEach((item, i) => {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'gallery-item';
+
+      if (item.caption) {
+        const cap = document.createElement('div');
+        cap.className = 'gallery-caption';
+        cap.textContent = item.caption;
+        wrapper.appendChild(cap);
+      }
+
+      if (item.video) {
+        const vw = document.createElement('div');
+        vw.className = 'video-wrapper';
+        const thumb = document.createElement('img');
+        thumb.className = 'video-thumb';
+        thumb.src = `https://img.youtube.com/vi/${item.video}/hqdefault.jpg`;
+        thumb.alt = item.caption || 'Video';
+        const play = document.createElement('div');
+        play.className = 'play-btn';
+        vw.appendChild(thumb);
+        vw.appendChild(play);
+        vw.addEventListener('click', () => {
+          const iframe = document.createElement('iframe');
+          iframe.src = `https://www.youtube.com/embed/${item.video}?autoplay=1`;
+          iframe.allow = 'autoplay; fullscreen';
+          thumb.style.opacity = '0';
+          setTimeout(() => thumb.remove(), 300);
+          play.remove();
+          vw.appendChild(iframe);
+        });
+        wrapper.appendChild(vw);
+      } else {
+        const el = document.createElement('img');
+        el.src = item.src;
+        el.alt = item.caption || p.name;
+        el.style.transitionDelay = (i * 0.04) + 's';
+        const ob = new IntersectionObserver(entries => {
+          entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); ob.unobserve(e.target); } });
+        }, { root: scroll, threshold: 0.05 });
+        ob.observe(el);
+        wrapper.appendChild(el);
+      }
+      section.appendChild(wrapper);
+    });
+
+    // project divider (thick line between projects)
+    const divider = document.createElement('div');
+    divider.style.cssText = 'height:1px; background:var(--line); margin:0;';
+    section.appendChild(divider);
+
+    gallery.appendChild(section);
+  });
+}
+
+buildAllProjects();
+
+// ── Scroll to project section ─────────────────────────
+function scrollToProject(id) {
+  const section = gallery.querySelector(`.proj-section[data-id="${id}"]`);
+  if (!section) return;
+
+  // switch to project panel first
+  document.getElementById('panelAbout').classList.remove('active');
+  document.getElementById('panelProject').classList.add('active');
+
+  // update topbar
+  const p = projects[id];
+  document.getElementById('rightLabel').textContent = p.cat;
+  document.getElementById('rightTitle').textContent = p.name;
+
+  // highlight nav
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  document.querySelector(`.nav-item[data-id="${id}"]`).classList.add('active');
+
+  // scroll section into view
+  setTimeout(() => {
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 10);
+}
+
+// ── Update nav highlight & topbar while scrolling ─────
+const sectionObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = Number(e.target.dataset.id);
+      const p = projects[id];
+      document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+      const navBtn = document.querySelector(`.nav-item[data-id="${id}"]`);
+      if (navBtn) navBtn.classList.add('active');
+      document.getElementById('rightLabel').textContent = p.cat;
+      document.getElementById('rightTitle').textContent = p.name;
+    }
+  });
+}, { root: scroll, threshold: 0.15 });
+
+// observe after build
+gallery.querySelectorAll('.proj-section').forEach(s => sectionObserver.observe(s));
+
+// ── Show About ────────────────────────────────────────
 function showAbout() {
-  currentId = null;
-  if (sentinelObserver) { sentinelObserver.disconnect(); sentinelObserver = null; }
   document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
   document.getElementById('aboutNavBtn').classList.add('active');
   document.getElementById('rightLabel').textContent = 'About';
   document.getElementById('rightTitle').textContent = 'Beatrice Tronconi';
   document.getElementById('panelAbout').classList.add('active');
   document.getElementById('panelProject').classList.remove('active');
-  document.getElementById('rightScroll').scrollTop = 0;
-}
-
-// ── Open project ───────────────────────────────────────
-function openProject(id) {
-  const p = projects[id];
-  currentId = id;
-
-  // disconnect previous sentinel
-  if (sentinelObserver) { sentinelObserver.disconnect(); sentinelObserver = null; }
-
-  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-  document.querySelector(`.nav-item[data-id="${id}"]`).classList.add('active');
-
-  document.getElementById('rightLabel').textContent = p.cat;
-  document.getElementById('rightTitle').textContent = p.name;
-
-  document.getElementById('pYear').textContent = p.year;
-  document.getElementById('pTeam').innerHTML   = p.team.length ? p.team.join('<br>') : '—';
-  document.getElementById('pRole').textContent = p.role;
-  document.getElementById('pDesc').textContent = p.desc;
-
-  const link = document.getElementById('pLink');
-  if (p.link) { link.href = p.link; link.style.display = 'block'; }
-  else { link.style.display = 'none'; }
-
-  // ── Build gallery ──
-  const gallery = document.getElementById('pGallery');
-  gallery.innerHTML = '';
-  const scroll = document.getElementById('rightScroll');
-
-  p.images.forEach((item, i) => {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'gallery-item';
-
-    if (item.caption) {
-      const cap = document.createElement('div');
-      cap.className = 'gallery-caption';
-      cap.textContent = item.caption;
-      wrapper.appendChild(cap);
-    }
-
-    if (item.video) {
-      // ── Lazy YouTube video ──
-      const vw = document.createElement('div');
-      vw.className = 'video-wrapper';
-
-      // thumbnail (YouTube auto-thumb)
-      const thumb = document.createElement('img');
-      thumb.className = 'video-thumb';
-      thumb.src = `https://img.youtube.com/vi/${item.video}/hqdefault.jpg`;
-      thumb.alt = item.caption || 'Video';
-
-      const play = document.createElement('div');
-      play.className = 'play-btn';
-
-      vw.appendChild(thumb);
-      vw.appendChild(play);
-
-      // click → load iframe
-      vw.addEventListener('click', () => {
-        const iframe = document.createElement('iframe');
-        iframe.src = `https://www.youtube.com/embed/${item.video}?autoplay=1`;
-        iframe.allow = 'autoplay; fullscreen';
-        thumb.style.opacity = '0';
-        setTimeout(() => thumb.remove(), 300);
-        play.remove();
-        vw.appendChild(iframe);
-      });
-
-      wrapper.appendChild(vw);
-
-    } else {
-      // ── Image ──
-      const el = document.createElement('img');
-      el.src = item.src;
-      el.alt = item.caption || p.name;
-      el.style.transitionDelay = (i * 0.04) + 's';
-
-      const ob = new IntersectionObserver(entries => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); ob.unobserve(e.target); } });
-      }, { root: scroll, threshold: 0.05 });
-      ob.observe(el);
-
-      wrapper.appendChild(el);
-    }
-
-    gallery.appendChild(wrapper);
-  });
-
-  // ── Sentinel: auto-advance to next project when gallery end is reached ──
-  const sentinel = document.createElement('div');
-  sentinel.className = 'gallery-sentinel';
-  gallery.appendChild(sentinel);
-
-  const nextId = id + 1;
-  if (nextId < projects.length) {
-    sentinelObserver = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          sentinelObserver.disconnect();
-          sentinelObserver = null;
-          // small delay so user sees the end before switching
-          setTimeout(() => openProject(nextId), 600);
-        }
-      });
-    }, { root: scroll, threshold: 1.0 });
-    sentinelObserver.observe(sentinel);
-  }
-
-  document.getElementById('panelAbout').classList.remove('active');
-  document.getElementById('panelProject').classList.add('active');
   scroll.scrollTop = 0;
 }
 
-// ── Keyboard ───────────────────────────────────────────
-document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowDown' && currentId !== null && currentId < projects.length - 1) {
-    e.preventDefault(); openProject(currentId + 1);
-  }
-  if (e.key === 'ArrowUp' && currentId !== null && currentId > 0) {
-    e.preventDefault(); openProject(currentId - 1);
-  }
-});
 </script>
 </body>
 </html>
